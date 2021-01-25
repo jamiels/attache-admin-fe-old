@@ -1,0 +1,167 @@
+<!-- MODAL STICK UP  -->
+<div
+  bsModal
+  #addNewAppModal="bs-modal"
+  class="modal fade stick-up"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addNewAppModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header clearfix ">
+        <button
+          type="button"
+          class="close"
+          (click)="addNewAppModal.hide()"
+          aria-hidden="true"
+        >
+          <i class="pg-icon">close</i>
+        </button>
+        <h4 class="p-b-5"><span class="semi-bold">New</span> Video</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" autocomplete="off" #basicForm="ngForm">
+          <div class="row">
+            <div class="col-sm-12">
+              <div
+                class="form-group form-group-default required"
+                [class.has-error]="
+                  modalAppName.invalid &&
+                  (modalAppName.dirty || modalAppName.touched)
+                "
+              >
+                <label>Video Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="appName"
+                  name="vidName"
+                  [(ngModel)]="vidName"
+                  #modalAppName="ngModel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div
+                class="form-group form-group-default required"
+                [class.has-error]="
+                  modalAppDescription.invalid &&
+                  (modalAppDescription.dirty || modalAppDescription.touched)
+                "
+              >
+                <label>URL</label>
+                <input
+                  type="text"
+                  placeholder="Youtube URL"
+                  class="form-control"
+                  id="appDescription"
+                  name="ytURL"
+                  [(ngModel)]="ytURL"
+                  #modalAppDescription="ngModel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="add-app"
+          type="button"
+          class="btn btn-primary  btn-cons"
+          (click)="addVideo()"
+          [class.disabled]="basicForm.invalid"
+        >
+          Add
+        </button>
+        <button
+          type="button"
+          class="btn btn-cons"
+          (click)="addNewAppModal.hide()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- START CONTAINER FLUID -->
+<pg-container>
+  <!-- START card -->
+  <div class="card card-transparent">
+    <div class="card-header ">
+      <div class="card-title">Table with Dynamic Rows</div>
+      <div class="pull-right">
+        <div class="col-xs-12">
+          <button (click)="showModal()" class="btn btn-primary btn-cons">
+            <i class="pg-icon">add</i> Add new record
+          </button>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <ngx-datatable
+          #tableDynamic
+          class="table table-hover"
+          [columns]="columnsDynamic"
+          [columnMode]="columnModeSetting"
+          [scrollbarH]="scrollBarHorizontal"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          [limit]="5"
+          [rows]="dynamicRows"
+        >
+          <ng-container *ngFor="let column of columnsDynamic">
+            <ngx-datatable-column
+              *ngIf="column.name === 'Actions'"
+              name="Actions"
+              prop="actions"
+            >
+              <ng-template
+                let-value="value"
+                let-row="row"
+                ngx-datatable-cell-template
+              >
+                <span>
+                  <button
+                    *ngIf="value === 'true'"
+                    class="btn btn-icon icon-left"
+                    (click)="toggleFlag(row.id)"
+                  >
+                    Disable
+                  </button>
+                  <button
+                    *ngIf="value !== 'true'"
+                    class="btn btn-icon icon-left"
+                    (click)="toggleFlag(row.id)"
+                  >
+                    Enable
+                  </button>
+                </span>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              *ngIf="column.name !== 'Actions'"
+              name="{{ column.name }}"
+              prop="{{ column.prop }}"
+            >
+            </ngx-datatable-column>
+          </ng-container>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+  <!-- END card -->
+</pg-container>
+<!-- END CONTAINER FLUID -->

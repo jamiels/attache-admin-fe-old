@@ -1,0 +1,311 @@
+<!-- MODAL STICK UP  -->
+<div
+  bsModal
+  #addNewAppModal="bs-modal"
+  class="modal fade stick-up"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="addNewAppModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header clearfix ">
+        <button
+          type="button"
+          class="close"
+          (click)="addNewAppModal.hide()"
+          aria-hidden="true"
+        >
+          <i class="pg-icon">close</i>
+        </button>
+        <h4 class="p-b-5"><span class="semi-bold">New</span> User</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" autocomplete="off" #basicForm="ngForm">
+          <div class="row">
+            <div class="col-sm-12">
+              <div
+                class="form-group form-group-default required"
+                [class.has-error]="
+                  modalAppName.invalid &&
+                  (modalAppName.dirty || modalAppName.touched)
+                "
+              >
+                <label>Login</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="login"
+                  name="login"
+                  [(ngModel)]="login"
+                  #modalAppName="ngModel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div
+                class="form-group form-group-default required"
+                [class.has-error]="
+                  modalAppName.invalid &&
+                  (modalAppName.dirty || modalAppName.touched)
+                "
+              >
+                <label>First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  name="firstName"
+                  [(ngModel)]="firstName"
+                  #modalAppName="ngModel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div
+                class="form-group form-group-default required"
+                [class.has-error]="
+                  modalAppName.invalid &&
+                  (modalAppName.dirty || modalAppName.touched)
+                "
+              >
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  name="lastName"
+                  [(ngModel)]="lastName"
+                  #modalAppName="ngModel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div
+                class="form-group form-group-default required"
+                [class.has-error]="
+                  modalAppName.invalid &&
+                  (modalAppName.dirty || modalAppName.touched)
+                "
+              >
+                <label>Password</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  [(ngModel)]="password"
+                  #modalAppName="ngModel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div
+                class="form-group form-group-default required"
+                [class.has-error]="
+                  modalAppName.invalid &&
+                  (modalAppName.dirty || modalAppName.touched)
+                "
+              >
+                <label>Email address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  [(ngModel)]="email"
+                  #modalAppName="ngModel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="add-app"
+          type="button"
+          class="btn btn-primary  btn-cons"
+          (click)="addUser()"
+          [class.disabled]="basicForm.invalid"
+        >
+          Add
+        </button>
+        <button
+          type="button"
+          class="btn btn-cons"
+          (click)="addNewAppModal.hide()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!-- MODAL STICK UP  -->
+<div
+  bsModal
+  #resetUserPwdModal="bs-modal"
+  class="modal fade stick-up"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="resetUserPwdModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header clearfix ">
+        <button
+          type="button"
+          class="close"
+          (click)="resetUserPwdModal.hide()"
+          aria-hidden="true"
+        >
+          <i class="pg-icon">close</i>
+        </button>
+        <h4 class="p-b-5">Reset user's password</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" autocomplete="off" #basicForm="ngForm">
+          <div class="row">
+            <div class="col-sm-12">
+              <div
+                class="form-group form-group-default required"
+                [class.has-error]="
+                  modalAppName.invalid &&
+                  (modalAppName.dirty || modalAppName.touched)
+                "
+              >
+                <label>Password</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="password1"
+                  name="password"
+                  [(ngModel)]="password"
+                  #modalAppName="ngModel"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="add-app"
+          type="button"
+          class="btn btn-primary  btn-cons"
+          (click)="resetUserId()"
+          [class.disabled]="basicForm.invalid"
+        >
+          Reset
+        </button>
+        <button
+          type="button"
+          class="btn btn-cons"
+          (click)="resetUserPwdModal.hide()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- START CONTAINER FLUID -->
+<pg-container>
+  <!-- START card -->
+  <div class="card card-transparent">
+    <div class="card-header ">
+      <div class="card-title">Table with Dynamic Rows</div>
+      <div class="pull-right">
+        <div class="col-xs-12">
+          <button (click)="showModal()" class="btn btn-primary btn-cons">
+            <i class="pg-icon">add</i> Add new record
+          </button>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <ngx-datatable
+          #tableDynamic
+          class="table table-hover"
+          [columns]="columnsDynamic"
+          [columnMode]="columnModeSetting"
+          [scrollbarH]="scrollBarHorizontal"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="'auto'"
+          [limit]="5"
+          [rows]="dynamicRows"
+        >
+          <ng-container *ngFor="let column of columnsDynamic">
+            <ngx-datatable-column
+              *ngIf="column.name === 'Actions'"
+              name="Actions"
+              prop="actions"
+            >
+              <ng-template
+                let-value="value"
+                let-row="row"
+                ngx-datatable-cell-template
+              >
+                <span>
+                  <button
+                    *ngIf="value === 'true'"
+                    class="btn btn-icon icon-left"
+                    (click)="toggleFlag(row.id)"
+                  >
+                    Disable
+                  </button>
+                  <button
+                    *ngIf="value !== 'true'"
+                    class="btn btn-icon icon-left mgrr"
+                    (click)="toggleFlag(row.id)"
+                  >
+                    Enable
+                  </button>
+                  <button
+                    class="btn btn-icon icon-left"
+                    (click)="showPwdModal(row.id)"
+                  >
+                    Reset
+                  </button>
+                </span>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              *ngIf="column.name !== 'Actions'"
+              name="{{ column.name }}"
+              prop="{{ column.prop }}"
+            >
+            </ngx-datatable-column>
+          </ng-container>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+  <!-- END card -->
+</pg-container>
+<!-- END CONTAINER FLUID -->
