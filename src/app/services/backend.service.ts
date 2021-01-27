@@ -75,7 +75,11 @@ export class BackendService {
   }
 
   changeFlag(id: number, recordType: string): Observable<any> {
-    return this.http.put<any>(`${this.baseURL}/changeFlag/${recordType}/${id}`);
+    return this.http.put(
+      `${this.baseURL}/changeFlag/${recordType}/${id}`,
+      {},
+      httpOptions
+    );
   }
 
   sendMsgToQuoteServer(id: number, msg: string): Observable<any> {
