@@ -7,25 +7,20 @@ import { User } from "../../models/User";
 @Component({
   selector: "app-advance",
   templateUrl: "./quoteServers.component.html",
-  styleUrls: ["./advance.component.scss"]
+  styleUrls: ["../advance/advance.component.scss"]
 })
 export class QuoteServersComponent implements OnInit {
-  @ViewChild("addNewAppModal", { static: true }) addNewAppModal: ModalDirective;
+  @ViewChild("addNewQuoteServerModal", { static: true })
+  addNewQuoteServerModal: ModalDirective;
 
-  @ViewChild("resetUserPwdModal", { static: true })
-  resetUserPwdModal: ModalDirective;
-
-  firstName = null;
-  lastName = null;
-  email = null;
-  login = null;
-  password = null;
-  userResetPwdId = null;
+  name = null;
+  ipAddress = null;
+  port = null;
   columnsDynamic = [
-    { prop: "firstName", name: "First Name" },
-    { prop: "lastName", name: "Last Name" },
-    { prop: "email", name: "Email" },
-    { prop: "isEnabled", name: "Actions" }
+    { prop: "name", name: "Name" },
+    { prop: "ipAddress", name: "IP Address" },
+    { prop: "port", name: "Port" },
+    { name: "Actions" }
   ];
   dynamicRows = [];
   @ViewChild(DatatableComponent, { static: false })
@@ -48,48 +43,35 @@ export class QuoteServersComponent implements OnInit {
   ngOnInit() {
     this.backendService.getAuthorizationToken().subscribe(data => {
       this.backendService.setToken(data.token);
-      this.backendService.getUsers().subscribe(ress => {
+      this.backendService.getData("quoteserver").subscribe(ress => {
         this.dynamicRows = ress;
       });
     });
   }
 
-  toggleFlag(id) {
-    // Toggle in UI
-    this.dynamicRows.map(el =>
-      el.id === id ? { ...el, isEnabled: !el.isEnabled } : el
-    );
-    // Toggle on server
-    this.backendService
-      .changeFlag(id, "user")
-      .subscribe(vid => console.log(vid));
-  }
-
   showModal() {
-    this.addNewAppModal.show();
+    this.addNewQuoteServerModal.show();
   }
 
-  showPwdModal(id) {
-    this.resetUserPwdModal.show();
-    this.userResetPwdId = id;
-  }
-  addUser() {
-    let temp = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      isEnabled: true
-    };
-    let extendedTemp = {
-      ...temp,
-      login: this.login,
-      password: this.password
-    };
-    //https://github.com/swimlane/ngx-datatable/issues/701
-    this.backendService.addUser({ properties: extendedTemp }).subscribe(res => {
-      console.log(res);
+  sendQuoteServerMsg(id, msg) {
+    this.backendService.sendMsgToQuoteServer(id, msg).subscribe(ress => {
+      console.log(ress);
     });
+  }
+
+  addUser() {
+    let { name, ipAddress, port } = this;
+    let temp = {
+      name,
+      ipAddress,
+      port
+    };
+    this.backendService
+      .addNewRecord({ properties: temp }, "quoteserver")
+      .subscribe(res => {
+        console.log(res);
+      });
     this.dynamicRows = [...this.dynamicRows, temp];
-    this.addNewAppModal.hide();
+    this.addNewQuoteServerModal.hide();
   }
 }

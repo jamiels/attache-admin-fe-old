@@ -28,8 +28,8 @@
               <div
                 class="form-group form-group-default required"
                 [class.has-error]="
-                  modalAppName.invalid &&
-                  (modalAppName.dirty || modalAppName.touched)
+                  modalvidName.invalid &&
+                  (modalvidName.dirty || modalvidName.touched)
                 "
               >
                 <label>Video Name</label>
@@ -39,7 +39,7 @@
                   id="appName"
                   name="vidName"
                   [(ngModel)]="vidName"
-                  #modalAppName="ngModel"
+                  #modalvidName="ngModel"
                   required
                 />
               </div>
@@ -50,8 +50,7 @@
               <div
                 class="form-group form-group-default required"
                 [class.has-error]="
-                  modalAppDescription.invalid &&
-                  (modalAppDescription.dirty || modalAppDescription.touched)
+                  modalytURL.invalid && (modalytURL.dirty || modalytURL.touched)
                 "
               >
                 <label>URL</label>
@@ -62,7 +61,7 @@
                   id="appDescription"
                   name="ytURL"
                   [(ngModel)]="ytURL"
-                  #modalAppDescription="ngModel"
+                  #modalytURL="ngModel"
                   required
                 />
               </div>
@@ -98,11 +97,11 @@
   <!-- START card -->
   <div class="card card-transparent">
     <div class="card-header ">
-      <div class="card-title">Table with Dynamic Rows</div>
+      <div class="card-title">VIDEOS</div>
       <div class="pull-right">
         <div class="col-xs-12">
           <button (click)="showModal()" class="btn btn-primary btn-cons">
-            <i class="pg-icon">add</i> Add new record
+            <i class="pg-icon">add</i> Add new video
           </button>
         </div>
       </div>
@@ -119,7 +118,7 @@
           [headerHeight]="50"
           [footerHeight]="50"
           [rowHeight]="'auto'"
-          [limit]="5"
+          [limit]="25"
           [rows]="dynamicRows"
         >
           <ng-container *ngFor="let column of columnsDynamic">
@@ -135,14 +134,14 @@
               >
                 <span>
                   <button
-                    *ngIf="value === 'true'"
+                    *ngIf="value === true"
                     class="btn btn-icon icon-left"
                     (click)="toggleFlag(row.id)"
                   >
                     Disable
                   </button>
                   <button
-                    *ngIf="value !== 'true'"
+                    *ngIf="value !== true"
                     class="btn btn-icon icon-left"
                     (click)="toggleFlag(row.id)"
                   >

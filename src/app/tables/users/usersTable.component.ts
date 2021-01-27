@@ -7,14 +7,15 @@ import { User } from "../../models/User";
 @Component({
   selector: "app-advance",
   templateUrl: "./usersTable.component.html",
-  styleUrls: ["./advance.component.scss"]
+  styleUrls: ["../advance/advance.component.scss"]
 })
 export class UsersTableComponent implements OnInit {
   @ViewChild("addNewAppModal", { static: true }) addNewAppModal: ModalDirective;
 
   @ViewChild("resetUserPwdModal", { static: true })
   resetUserPwdModal: ModalDirective;
-
+  resetPassword = null;
+  pwdErr = false;
   firstName = null;
   lastName = null;
   email = null;
@@ -48,7 +49,7 @@ export class UsersTableComponent implements OnInit {
   ngOnInit() {
     this.backendService.getAuthorizationToken().subscribe(data => {
       this.backendService.setToken(data.token);
-      this.backendService.getUsers().subscribe(ress => {
+      this.backendService.getData("user").subscribe(ress => {
         this.dynamicRows = ress;
       });
     });
@@ -73,6 +74,14 @@ export class UsersTableComponent implements OnInit {
     this.resetUserPwdModal.show();
     this.userResetPwdId = id;
   }
+
+  resetUserPwd() {
+    console.log(this.resetPassword);
+    if (this.resetPassword.length < 3) {
+      this.pwdErr = true;
+      return;
+    }
+  }
   addUser() {
     let temp = {
       firstName: this.firstName,
@@ -85,10 +94,11 @@ export class UsersTableComponent implements OnInit {
       login: this.login,
       password: this.password
     };
-    //https://github.com/swimlane/ngx-datatable/issues/701
-    this.backendService.addUser({ properties: extendedTemp }).subscribe(res => {
-      console.log(res);
-    });
+    this.backendService
+      .addNewRecord({ properties: extendedTemp }, "user")
+      .subscribe(res => {
+        console.log(res);
+      });
     this.dynamicRows = [...this.dynamicRows, temp];
     this.addNewAppModal.hide();
   }

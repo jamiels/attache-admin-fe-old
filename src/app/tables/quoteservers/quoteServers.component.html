@@ -1,11 +1,11 @@
 <!-- MODAL STICK UP  -->
 <div
   bsModal
-  #addNewAppModal="bs-modal"
+  #addNewQuoteServerModal="bs-modal"
   class="modal fade stick-up"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="addNewAppModal"
+  aria-labelledby="addNewQuoteServerModal"
   aria-hidden="true"
 >
   <div class="modal-dialog">
@@ -14,7 +14,7 @@
         <button
           type="button"
           class="close"
-          (click)="addNewAppModal.hide()"
+          (click)="addNewQuoteServerModal.hide()"
           aria-hidden="true"
         >
           <i class="pg-icon">close</i>
@@ -32,13 +32,13 @@
                   (modalAppName.dirty || modalAppName.touched)
                 "
               >
-                <label>Login</label>
+                <label>Name</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="login"
-                  name="login"
-                  [(ngModel)]="login"
+                  id="name"
+                  name="name"
+                  [(ngModel)]="name"
                   #modalAppName="ngModel"
                   required
                 />
@@ -58,9 +58,9 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="firstName"
-                  name="firstName"
-                  [(ngModel)]="firstName"
+                  id="host"
+                  name="ipAddress"
+                  [(ngModel)]="ipAddress"
                   #modalAppName="ngModel"
                   required
                 />
@@ -78,55 +78,11 @@
               >
                 <label>Last Name</label>
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
-                  id="lastName"
-                  name="lastName"
-                  [(ngModel)]="lastName"
-                  #modalAppName="ngModel"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div
-                class="form-group form-group-default required"
-                [class.has-error]="
-                  modalAppName.invalid &&
-                  (modalAppName.dirty || modalAppName.touched)
-                "
-              >
-                <label>Password</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  [(ngModel)]="password"
-                  #modalAppName="ngModel"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div
-                class="form-group form-group-default required"
-                [class.has-error]="
-                  modalAppName.invalid &&
-                  (modalAppName.dirty || modalAppName.touched)
-                "
-              >
-                <label>Email address</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  [(ngModel)]="email"
+                  id="port"
+                  name="port"
+                  [(ngModel)]="port"
                   #modalAppName="ngModel"
                   required
                 />
@@ -148,7 +104,7 @@
         <button
           type="button"
           class="btn btn-cons"
-          (click)="addNewAppModal.hide()"
+          (click)="addNewQuoteServerModal.hide()"
         >
           Close
         </button>
@@ -159,88 +115,16 @@
   <!-- /.modal-dialog -->
 </div>
 
-<!-- MODAL STICK UP  -->
-<div
-  bsModal
-  #resetUserPwdModal="bs-modal"
-  class="modal fade stick-up"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="resetUserPwdModal"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header clearfix ">
-        <button
-          type="button"
-          class="close"
-          (click)="resetUserPwdModal.hide()"
-          aria-hidden="true"
-        >
-          <i class="pg-icon">close</i>
-        </button>
-        <h4 class="p-b-5">Reset user's password</h4>
-      </div>
-      <div class="modal-body">
-        <form role="form" autocomplete="off" #basicForm="ngForm">
-          <div class="row">
-            <div class="col-sm-12">
-              <div
-                class="form-group form-group-default required"
-                [class.has-error]="
-                  modalAppName.invalid &&
-                  (modalAppName.dirty || modalAppName.touched)
-                "
-              >
-                <label>Login</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="password1"
-                  name="password"
-                  [(ngModel)]="password"
-                  #modalAppName="ngModel"
-                  required
-                />
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          id="add-app"
-          type="button"
-          class="btn btn-primary  btn-cons"
-          (click)="resetUserId()"
-          [class.disabled]="basicForm.invalid"
-        >
-          Add
-        </button>
-        <button
-          type="button"
-          class="btn btn-cons"
-          (click)="resetUserPwdModal.hide()"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
 <!-- START CONTAINER FLUID -->
 <pg-container>
   <!-- START card -->
   <div class="card card-transparent">
     <div class="card-header ">
-      <div class="card-title">Table with Dynamic Rows</div>
+      <div class="card-title">QUOTE SERVERS</div>
       <div class="pull-right">
         <div class="col-xs-12">
           <button (click)="showModal()" class="btn btn-primary btn-cons">
-            <i class="pg-icon">add</i> Add new record
+            <i class="pg-icon">add</i> Add new quote server
           </button>
         </div>
       </div>
@@ -257,7 +141,7 @@
           [headerHeight]="50"
           [footerHeight]="50"
           [rowHeight]="'auto'"
-          [limit]="5"
+          [limit]="25"
           [rows]="dynamicRows"
         >
           <ng-container *ngFor="let column of columnsDynamic">
@@ -271,26 +155,33 @@
                 let-row="row"
                 ngx-datatable-cell-template
               >
-                <span>
+                <span class="btnsContainer">
                   <button
-                    *ngIf="value === 'true'"
-                    class="btn btn-icon icon-left"
-                    (click)="toggleFlag(row.id)"
+                    class="btn btn-icon icon-left another"
+                    (click)="sendQuoteServerMsg(row.id, 'GETQUOTES')"
                   >
-                    Disable
+                    Get Quotes
                   </button>
+
                   <button
-                    *ngIf="value !== 'true'"
-                    class="btn btn-icon icon-left mgrr"
-                    (click)="toggleFlag(row.id)"
+                    class="btn btn-icon icon-left another"
+                    (click)="sendQuoteServerMsg(row.id, 'DEBUGON')"
                   >
-                    Enable
+                    Debug On
                   </button>
+
                   <button
-                    class="btn btn-icon icon-left"
-                    (click)="showPwdModal(row.id)"
+                    class="btn btn-icon icon-left another"
+                    (click)="sendQuoteServerMsg(row.id, 'DEBUGOFF')"
                   >
-                    Reset
+                    Debug Off
+                  </button>
+
+                  <button
+                    class="btn btn-icon icon-left another"
+                    (click)="sendQuoteServerMsg(row.id, 'BYE')"
+                  >
+                    Stop
                   </button>
                 </span>
               </ng-template>

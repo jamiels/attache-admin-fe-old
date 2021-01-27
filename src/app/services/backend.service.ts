@@ -53,42 +53,32 @@ export class BackendService {
     httpOptions.headers = httpOptions.headers.set("Authorization", token);
   }
 
-  getVideos(): Observable<Video[]> {
-    return this.http.get<Video[]>(`${this.baseURL}/video`, httpOptions);
-  }
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseURL}/user`, httpOptions);
+  getData(recordType: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseURL}/${recordType}`, httpOptions);
   }
 
-  addVideo(video: any): Observable<Video> {
-    console.log(video);
-    return this.http.post<Video>(`${this.baseURL}/video`, video, httpOptions);
+  resetUserPassword(id: number, password: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseURL}/resetUserPassword`,
+      { id, password },
+      httpOptions
+    );
   }
 
-  addUser(user: any): Observable<User> {
-    console.log(user);
-    return this.http.post<User>(`${this.baseURL}/user`, user, httpOptions);
+  addNewRecord(record: any, recordType: string): Observable<any[]> {
+    console.log(record);
+    return this.http.post<any>(
+      `${this.baseURL}/${recordType}`,
+      record,
+      httpOptions
+    );
   }
 
-  changeFlag(id: number, recordName: string): Observable<any> {
-    return this.http.put(`${this.baseURL}/changeFlag/${recordName}/${id}`);
+  changeFlag(id: number, recordType: string): Observable<any> {
+    return this.http.put<any>(`${this.baseURL}/changeFlag/${recordType}/${id}`);
   }
 
-  /*
-  // Delete Todo
-  deleteTodo(todo:Todo):Observable<Todo> {
-    const url = `${this.todosUrl}/${todo.id}`;
-    return this.http.delete<Todo>(url, httpOptions);
+  sendMsgToQuoteServer(id: number, msg: string): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/${id}/${msg}`);
   }
-
-  // Add Todo
-  addTodo(todo:Todo):Observable<Todo> {
-    return this.http.post<Todo>(this.todosUrl, todo, httpOptions);
-  }
-
-  // Toggle Completed
-  toggleCompleted(todo: Todo):Observable<any> {
-    const url = `${this.todosUrl}/${todo.id}`;
-    return this.http.put(url, todo, httpOptions);
-  } */
 }

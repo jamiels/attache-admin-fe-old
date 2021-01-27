@@ -42,7 +42,7 @@ export class VideosTableComponent implements OnInit {
   ngOnInit() {
     this.backendService.getAuthorizationToken().subscribe(data => {
       this.backendService.setToken(data.token);
-      this.backendService.getVideos().subscribe(videos => {
+      this.backendService.getData("video").subscribe(videos => {
         this.dynamicRows = videos;
       });
     });
@@ -69,9 +69,11 @@ export class VideosTableComponent implements OnInit {
       isEnabled: true
     };
     //https://github.com/swimlane/ngx-datatable/issues/701
-    this.backendService.addVideo({ properties: temp }).subscribe(res => {
-      console.log(res);
-    });
+    this.backendService
+      .addNewRecord({ properties: temp }, "video")
+      .subscribe(res => {
+        console.log(res);
+      });
     this.dynamicRows = [...this.dynamicRows, temp];
     this.addNewAppModal.hide();
   }

@@ -1,6 +1,8 @@
 import { AdvanceComponent } from "./tables/advance/advance.component";
 import { VideosTableComponent } from "./tables/advance/videosTable.component";
 import { UsersTableComponent } from "./tables/users/usersTable.component";
+import { QuoteServersComponent } from "./tables/quoteservers/quoteServers.component";
+import { ContainerComponent } from "./@pages/components/container/container.component";
 //Angular Core
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
@@ -22,13 +24,9 @@ import { AppComponent } from "./app.component";
 
 //Layouts
 import {
-  CondensedComponent,
   BlankComponent,
   RootLayout,
-  CorporateLayout,
-  SimplyWhiteLayout,
-  ExecutiveLayout,
-  CasualLayout
+  SimplyWhiteLayout
 } from "./@pages/layouts";
 //Layout Service - Required
 import { pagesToggleService } from "./@pages/services/toggler.service";
@@ -71,9 +69,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
 import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 
 //Sample Blank Pages - Optional
-import { BlankCorporateComponent } from "./@pages/layouts/blank-corporate/blank-corporate.component";
 import { BlankSimplywhiteComponent } from "./@pages/layouts/blank-simplywhite/blank-simplywhite.component";
-import { BlankCasualComponent } from "./@pages/layouts/blank-casual/blank-casual.component";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -91,11 +87,7 @@ export class AppHammerConfig extends HammerGestureConfig {
 @NgModule({
   declarations: [
     AppComponent,
-    CondensedComponent,
-    CorporateLayout,
     SimplyWhiteLayout,
-    ExecutiveLayout,
-    CasualLayout,
     SidebarComponent,
     QuickviewComponent,
     SearchOverlayComponent,
@@ -103,12 +95,11 @@ export class AppHammerConfig extends HammerGestureConfig {
     HorizontalMenuComponent,
     BlankComponent,
     RootLayout,
-    BlankCorporateComponent,
     BlankSimplywhiteComponent,
-    BlankCasualComponent,
     AdvanceComponent,
     VideosTableComponent,
-    UsersTableComponent
+    UsersTableComponent,
+    QuoteServersComponent
   ],
   imports: [
     NgxDatatableModule,

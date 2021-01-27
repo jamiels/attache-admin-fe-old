@@ -189,18 +189,23 @@
               <div
                 class="form-group form-group-default required"
                 [class.has-error]="
-                  modalAppName.invalid &&
-                  (modalAppName.dirty || modalAppName.touched)
+                  modalresetPassword.invalid &&
+                  (modalresetPassword.dirty ||
+                    modalresetPassword.touched ||
+                    modalresetPassword.length < 3)
                 "
               >
+                <span *ngIf="pwdErr === true"
+                  >Password must be at least 3 characters long</span
+                >
                 <label>Password</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="password1"
-                  name="password"
-                  [(ngModel)]="password"
-                  #modalAppName="ngModel"
+                  id="resetPassword"
+                  name="resetPassword"
+                  [(ngModel)]="resetPassword"
+                  #modalresetPassword="ngModel"
                   required
                 />
               </div>
@@ -213,15 +218,19 @@
           id="add-app"
           type="button"
           class="btn btn-primary  btn-cons"
-          (click)="resetUserId()"
           [class.disabled]="basicForm.invalid"
+          (click)="resetUserPwd()"
         >
           Reset
         </button>
         <button
           type="button"
           class="btn btn-cons"
-          (click)="resetUserPwdModal.hide()"
+          (click)="
+            resetUserPwdModal.hide();
+            resetPassword = null;
+            userResetPwdId = null
+          "
         >
           Close
         </button>
@@ -236,11 +245,11 @@
   <!-- START card -->
   <div class="card card-transparent">
     <div class="card-header ">
-      <div class="card-title">Table with Dynamic Rows</div>
+      <div class="card-title">USERS</div>
       <div class="pull-right">
         <div class="col-xs-12">
           <button (click)="showModal()" class="btn btn-primary btn-cons">
-            <i class="pg-icon">add</i> Add new record
+            <i class="pg-icon">add</i> Add new user
           </button>
         </div>
       </div>
@@ -257,7 +266,7 @@
           [headerHeight]="50"
           [footerHeight]="50"
           [rowHeight]="'auto'"
-          [limit]="5"
+          [limit]="25"
           [rows]="dynamicRows"
         >
           <ng-container *ngFor="let column of columnsDynamic">
@@ -271,7 +280,7 @@
                 let-row="row"
                 ngx-datatable-cell-template
               >
-                <span>
+                <span class="btnsContainer">
                   <button
                     *ngIf="value === 'true'"
                     class="btn btn-icon icon-left"
