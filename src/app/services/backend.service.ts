@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 import { User } from "../models/User";
 import { Video } from "../models/Video";
@@ -25,8 +26,8 @@ export class BackendService {
 
   constructor(private http: HttpClient) {
     const credentials = {
-      login: "placeholder",
-      password: "placeholder"
+      login: environment.login,
+      password: environment.password
     };
     this.http
       .post<any>(`${this.baseURL}/authenticate`, credentials)
@@ -46,8 +47,8 @@ export class BackendService {
 
   getAuthorizationToken(): Observable<any> {
     const credentials = {
-      login: "placeholder",
-      password: "placeholder"
+      login: environment.login,
+      password: environment.password
     };
     return this.http.post<any>(`${this.baseURL}/authenticate`, credentials);
   }

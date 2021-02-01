@@ -20,8 +20,8 @@ export class AuthService {
 
   getAuthorizationToken(): any {
     const credentials = {
-      login: "placeholder",
-      password: "placeholder"
+      login: environment.login,
+      password: environment.password
     };
     this.http
       .post<any>(`${this.baseURL}/authenticate`, credentials)
