@@ -8,7 +8,7 @@ import { BlankSimplywhiteComponent } from "./@pages/layouts";
 export const AppRoutes: Routes = [
   {
     path: "",
-    component: BlankSimplywhiteComponent,
+    component: UsersTableComponent,
     children: [
       {
         path: "users",
