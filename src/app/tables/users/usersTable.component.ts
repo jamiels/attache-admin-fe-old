@@ -57,7 +57,7 @@ export class UsersTableComponent implements OnInit {
 
   toggleFlag(id) {
     // Toggle in UI
-    this.dynamicRows.map(el =>
+    this.dynamicRows = this.dynamicRows.map(el =>
       el.id === id ? { ...el, isEnabled: !el.isEnabled } : el
     );
     // Toggle on server
@@ -102,8 +102,8 @@ export class UsersTableComponent implements OnInit {
       .addNewRecord({ properties: extendedTemp }, "user")
       .subscribe(res => {
         console.log(res);
+        this.dynamicRows = [...this.dynamicRows, res.created];
       });
-    this.dynamicRows = [...this.dynamicRows, temp];
     this.addNewAppModal.hide();
   }
 }

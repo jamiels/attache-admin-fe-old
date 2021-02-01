@@ -137,14 +137,14 @@
               >
                 <span>
                   <button
-                    *ngIf="value === true"
+                    *ngIf="row.isEnabled === true"
                     class="btn btn-icon icon-left"
                     (click)="toggleFlag(row.id)"
                   >
                     Disable
                   </button>
                   <button
-                    *ngIf="value !== true"
+                    *ngIf="row.isEnabled !== true"
                     class="btn btn-icon icon-left"
                     (click)="toggleFlag(row.id)"
                   >

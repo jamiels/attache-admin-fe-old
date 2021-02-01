@@ -50,13 +50,13 @@ export class VideosTableComponent implements OnInit {
 
   toggleFlag(id) {
     // Toggle in UI
-    this.dynamicRows.map(el =>
+    this.dynamicRows = this.dynamicRows.map(el =>
       el.id === id ? { ...el, isEnabled: !el.isEnabled } : el
     );
     // Toggle on server
     this.backendService
       .changeFlag(id, "video")
-      .subscribe(vid => console.log(vid));
+      .subscribe(vid => console.log(vid.created));
   }
 
   showModal() {
@@ -78,8 +78,8 @@ export class VideosTableComponent implements OnInit {
       .addNewRecord({ properties: temp }, "video")
       .subscribe(res => {
         console.log(res);
+        this.dynamicRows = [...this.dynamicRows, res.created];
       });
-    this.dynamicRows = [...this.dynamicRows, temp];
     this.addNewAppModal.hide();
   }
 }

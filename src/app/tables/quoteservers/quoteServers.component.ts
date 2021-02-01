@@ -5,7 +5,7 @@ import { BackendService } from "../../services/backend.service";
 import { User } from "../../models/User";
 
 @Component({
-  selector: "app-advance",
+  selector: "quote-table",
   templateUrl: "./quoteServers.component.html",
   styleUrls: ["../advance/advance.component.scss"]
 })
@@ -76,8 +76,8 @@ export class QuoteServersComponent implements OnInit {
       .addNewRecord({ properties: temp }, "quoteserver")
       .subscribe(res => {
         console.log(res);
+        this.dynamicRows = [...this.dynamicRows, res.created];
       });
-    this.dynamicRows = [...this.dynamicRows, temp];
     this.addNewQuoteServerModal.hide();
   }
 }
