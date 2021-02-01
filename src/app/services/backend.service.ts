@@ -40,6 +40,10 @@ export class BackendService {
       });
   }
 
+  removeTokenFromLocalStorage() {
+    localStorage.removeItem("token");
+  }
+
   getAuthorizationToken(): Observable<any> {
     const credentials = {
       login: "placeholder",

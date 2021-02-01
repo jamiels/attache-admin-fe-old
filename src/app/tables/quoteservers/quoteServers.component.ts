@@ -16,6 +16,7 @@ export class QuoteServersComponent implements OnInit {
   name = null;
   ipAddress = null;
   port = null;
+  authMessage = null;
   columnsDynamic = [
     { prop: "name", name: "Name" },
     { prop: "ipAddress", name: "IP Address" },
@@ -59,12 +60,17 @@ export class QuoteServersComponent implements OnInit {
     });
   }
 
+  logOut() {
+    this.backendService.removeTokenFromLocalStorage();
+  }
+
   addUser() {
-    let { name, ipAddress, port } = this;
+    let { name, ipAddress, port, authMessage } = this;
     let temp = {
       name,
       ipAddress,
-      port
+      port,
+      authMessage
     };
     this.backendService
       .addNewRecord({ properties: temp }, "quoteserver")

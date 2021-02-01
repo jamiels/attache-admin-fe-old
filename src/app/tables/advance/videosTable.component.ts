@@ -62,6 +62,11 @@ export class VideosTableComponent implements OnInit {
   showModal() {
     this.addNewAppModal.show();
   }
+
+  logOut() {
+    this.backendService.removeTokenFromLocalStorage();
+  }
+
   addVideo() {
     let temp = {
       name: this.vidName,

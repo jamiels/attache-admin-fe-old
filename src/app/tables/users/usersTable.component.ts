@@ -70,6 +70,10 @@ export class UsersTableComponent implements OnInit {
     this.addNewAppModal.show();
   }
 
+  logOut() {
+    this.backendService.removeTokenFromLocalStorage();
+  }
+
   showPwdModal(id) {
     this.resetUserPwdModal.show();
     this.userResetPwdId = id;
