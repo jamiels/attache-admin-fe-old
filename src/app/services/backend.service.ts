@@ -87,6 +87,9 @@ export class BackendService {
   }
 
   sendMsgToQuoteServer(id: number, msg: string): Observable<any> {
-    return this.http.get<any>(`${this.baseURL}/${id}/${msg}`);
+    return this.http.get<any>(
+      `${this.baseURL}/quoteserver/${id}/${msg}`,
+      httpOptions
+    );
   }
 }
