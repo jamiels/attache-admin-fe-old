@@ -85,6 +85,21 @@ export class UsersTableComponent implements OnInit {
       this.pwdErr = true;
       return;
     }
+    const body = {
+      id: this.userResetPwdId,
+      password: this.resetPassword
+    };
+    this.backendService
+      .resetUserPassword(this.userResetPwdId, this.resetPassword)
+      .subscribe(res => {
+        console.log(res);
+        if (res["success"]) {
+          this.resetUserPwdModal.hide();
+          return;
+        } else {
+          alert("Unknown server error");
+        }
+      });
   }
   addUser() {
     let temp = {
