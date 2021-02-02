@@ -28,7 +28,7 @@ export const AppRoutes: Routes = [
         path: "quoteservers",
         component: QuoteServersComponent,
         data: {
-          title: "Quote Servers"
+          title: "Quote  Servers"
         }
       }
     ]

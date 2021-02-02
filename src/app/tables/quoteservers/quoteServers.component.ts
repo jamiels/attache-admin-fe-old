@@ -76,7 +76,7 @@ export class QuoteServersComponent implements OnInit {
       .addNewRecord({ properties: temp }, "quoteserver")
       .subscribe(res => {
         console.log(res);
-        this.dynamicRows = [...this.dynamicRows, res.created];
+        this.dynamicRows = [...this.dynamicRows, res["created"]];
       });
     this.addNewQuoteServerModal.hide();
   }

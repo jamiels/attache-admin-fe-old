@@ -102,7 +102,7 @@ export class UsersTableComponent implements OnInit {
       .addNewRecord({ properties: extendedTemp }, "user")
       .subscribe(res => {
         console.log(res);
-        this.dynamicRows = [...this.dynamicRows, res.created];
+        this.dynamicRows = [...this.dynamicRows, res["created"]];
       });
     this.addNewAppModal.hide();
   }

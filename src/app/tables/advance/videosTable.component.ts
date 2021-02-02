@@ -78,7 +78,7 @@ export class VideosTableComponent implements OnInit {
       .addNewRecord({ properties: temp }, "video")
       .subscribe(res => {
         console.log(res);
-        this.dynamicRows = [...this.dynamicRows, res.created];
+        this.dynamicRows = [...this.dynamicRows, res["created"]];
       });
     this.addNewAppModal.hide();
   }

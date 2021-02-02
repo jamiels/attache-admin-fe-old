@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { SimplywhiteComponent } from "./@pages/layouts/simplywhite/simplywhite.component";
+//import { SimplywhiteComponent } from "./@pages/layouts/simplywhite/simplywhite.component";
 import { RootLayout } from "./@pages/layouts/root/root.component";
 import { QuoteServersComponent } from "./tables/quoteservers/quoteServers.component";
 
@@ -34,7 +34,6 @@ export class AppComponent extends RootLayout implements OnInit {
   ];
   ngOnInit() {
     this.changeLayout("menu-pin");
-    this.router.navigate(["users"]);
     //Will sidebar close on screens below 1024
     this.autoHideMenuPin();
   }

@@ -1,24 +1,43 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, OnDestroy, ViewChild, Input, HostListener } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { pagesToggleService } from '../../services/toggler.service';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from "@angular/animations";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  Input,
+  HostListener
+} from "@angular/core";
+import { Subscription } from "rxjs";
+import { pagesToggleService } from "../../services/toggler.service";
+import {
+  Router,
+  Event,
+  NavigationStart,
+  NavigationEnd,
+  NavigationError
+} from "@angular/router";
 declare var pg: any;
 
 @Component({
-  selector: 'root-layout',
-  templateUrl: './root.component.html',
-  styleUrls: ['./root.component.scss']
+  selector: "root-layout",
+  templateUrl: "./root.component.html",
+  styleUrls: ["./root.component.scss"]
 })
 export class RootLayout implements OnInit, OnDestroy {
-  @ViewChild('root', { static: false }) root;
+  @ViewChild("root", { static: false }) root;
   layoutState: string;
   extraLayoutClass: string;
   _boxed: boolean = false;
   _menuPin: boolean = false;
   _enableHorizontalContainer: boolean;
-  _pageContainerClass = '';
-  _contentClass = '';
+  _pageContainerClass = "";
+  _contentClass = "";
   _footer: boolean = true;
   _menuDrawerOpen: boolean = false;
   //Mobile
@@ -33,10 +52,10 @@ export class RootLayout implements OnInit, OnDestroy {
   _subscriptions: Array<Subscription> = [];
   _layout;
   @Input()
-  public contentClass: string = '';
+  public contentClass: string = "";
 
   @Input()
-  public pageWrapperClass: string = '';
+  public pageWrapperClass: string = "";
 
   @Input()
   public footer: boolean = true;
@@ -53,9 +72,9 @@ export class RootLayout implements OnInit, OnDestroy {
             root = root.children[0];
           } else if (root.data) {
             //Custom Route Data here
-            this._pageTitle = root.data['title'];
-            this._layoutOption = root.data['layoutOption'];
-            this._boxed = root.data['boxed'];
+            this._pageTitle = root.data["title"];
+            this._layoutOption = root.data["layoutOption"];
+            this._boxed = root.data["boxed"];
             break;
           } else {
             break;
@@ -66,7 +85,7 @@ export class RootLayout implements OnInit, OnDestroy {
         //Close Sidebar and Horizonta Menu
         if (this._mobileSidebar) {
           this._mobileSidebar = false;
-          pg.removeClass(document.body, 'sidebar-open');
+          pg.removeClass(document.body, "sidebar-open");
           this.toggler.toggleMobileSideBar(this._mobileSidebar);
         }
         this._mobileHorizontalMenu = false;
@@ -134,7 +153,9 @@ export class RootLayout implements OnInit, OnDestroy {
     pg.removeClass(document.body, type);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.navigate(["users"]);
+  }
 
   ngOnDestroy() {
     for (const sub of this._subscriptions) {
@@ -149,7 +170,7 @@ export class RootLayout implements OnInit, OnDestroy {
   scrollToTop() {
     let top = window.pageYOffset;
     if (top == 0) {
-      let scroller = document.querySelector('.page-container');
+      let scroller = document.querySelector(".page-container");
       if (scroller) scroller.scrollTo(0, 0);
     } else {
       window.scrollTo(0, 0);
@@ -182,10 +203,10 @@ export class RootLayout implements OnInit, OnDestroy {
       return;
     }
     if (this._menuPin) {
-      pg.removeClass(document.body, 'menu-pin');
+      pg.removeClass(document.body, "menu-pin");
       this._menuPin = false;
     } else {
-      pg.addClass(document.body, 'menu-pin');
+      pg.addClass(document.body, "menu-pin");
       this._menuPin = true;
     }
   }
@@ -204,10 +225,10 @@ export class RootLayout implements OnInit, OnDestroy {
   toggleMobileSidebar() {
     if (this._mobileSidebar) {
       this._mobileSidebar = false;
-      pg.removeClass(document.body, 'sidebar-open');
+      pg.removeClass(document.body, "sidebar-open");
     } else {
       this._mobileSidebar = true;
-      pg.addClass(document.body, 'sidebar-open');
+      pg.addClass(document.body, "sidebar-open");
     }
     this.toggler.toggleMobileSideBar(this._mobileSidebar);
   }
@@ -216,7 +237,7 @@ export class RootLayout implements OnInit, OnDestroy {
    *   @description Open Secondary Sidebar on Mobile - Service
    */
   toggleSecondarySideBar() {
-    console.log('hi');
+    console.log("hi");
     this._secondarySideBar = this._secondarySideBar == true ? false : true;
     this.toggler.toggleSecondarySideBar(this._secondarySideBar);
   }
@@ -225,11 +246,12 @@ export class RootLayout implements OnInit, OnDestroy {
    *   @description Call Horizontal Menu Toggle Service for mobile
    */
   toggleHorizontalMenuMobile() {
-    this._mobileHorizontalMenu = this._mobileHorizontalMenu == true ? false : true;
+    this._mobileHorizontalMenu =
+      this._mobileHorizontalMenu == true ? false : true;
     this.toggler.toggleMobileHorizontalMenu(this._mobileHorizontalMenu);
   }
 
-  @HostListener('window:resize', [])
+  @HostListener("window:resize", [])
   onResize() {
     this.autoHideMenuPin();
   }
@@ -237,13 +259,13 @@ export class RootLayout implements OnInit, OnDestroy {
   //Utils
   autoHideMenuPin() {
     if (window.innerWidth < 1025) {
-      if (pg.hasClass(document.body, 'menu-pin')) {
-        pg.addClass(document.body, 'menu-unpinned');
-        pg.removeClass(document.body, 'menu-pin');
+      if (pg.hasClass(document.body, "menu-pin")) {
+        pg.addClass(document.body, "menu-unpinned");
+        pg.removeClass(document.body, "menu-pin");
       }
     } else {
-      if (pg.hasClass(document.body, 'menu-unpinned')) {
-        pg.addClass(document.body, 'menu-pin');
+      if (pg.hasClass(document.body, "menu-unpinned")) {
+        pg.addClass(document.body, "menu-pin");
       }
     }
   }
