@@ -60,7 +60,7 @@ export class RootLayout implements OnInit, OnDestroy {
   @Input()
   public footer: boolean = true;
 
-  constructor(public toggler: pagesToggleService, private router: Router) {
+  constructor(public toggler: pagesToggleService, public router: Router) {
     if (this.layoutState) {
       pg.addClass(document.body, this.layoutState);
     }
@@ -153,9 +153,7 @@ export class RootLayout implements OnInit, OnDestroy {
     pg.removeClass(document.body, type);
   }
 
-  ngOnInit() {
-    this.router.navigate(["users"]);
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     for (const sub of this._subscriptions) {
