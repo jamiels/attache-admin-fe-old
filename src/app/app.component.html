@@ -1,9 +1,104 @@
 <div>
-	<pg-sidebar>
+  <!-- MODAL STICK UP  -->
+  <div
+    bsModal
+    #loginModal="bs-modal"
+    class="modal fade stick-up"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="loginModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header clearfix ">
+          <button
+            type="button"
+            class="close"
+            (click)="loginModal.hide()"
+            aria-hidden="true"
+          >
+            <i class="pg-icon">close</i>
+          </button>
+          <h4 class="p-b-5"><span class="semi-bold">Login</span></h4>
+        </div>
+        <div class="modal-body">
+          <form role="form" autocomplete="off" #basicForm="ngForm">
+            <div class="row">
+              <div class="col-sm-12">
+                <div
+                  class="form-group form-group-default required"
+                  [class.has-error]="
+                    modalAppName.invalid &&
+                    (modalAppName.dirty || modalAppName.touched)
+                  "
+                >
+                  <label>Login</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="login"
+                    name="login"
+                    [(ngModel)]="login"
+                    #modalAppName="ngModel"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div
+                  class="form-group form-group-default required"
+                  [class.has-error]="
+                    modalAppName.invalid &&
+                    (modalAppName.dirty || modalAppName.touched)
+                  "
+                >
+                  <label>Password</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    [(ngModel)]="password"
+                    #modalAppName="ngModel"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            id="add-app"
+            type="button"
+            class="btn btn-primary  btn-cons"
+            (click)="authUser()"
+            [class.disabled]="basicForm.invalid"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            class="btn btn-cons"
+            (click)="loginModal.hide()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <pg-sidebar>
     <ng-template #menuItems>
-      <pg-menu-items [Items]="menuLinks">
-      </pg-menu-items>
+      <pg-menu-items [Items]="menuLinks"> </pg-menu-items>
     </ng-template>
   </pg-sidebar>
+  <span *ngIf="!isAuthenticated">
     <router-outlet></router-outlet>
+  </span>
 </div>
