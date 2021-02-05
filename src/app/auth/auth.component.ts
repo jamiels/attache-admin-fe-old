@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
   selector: "app-auth",
   templateUrl: "./auth.component.html"
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
   title = "App works";
   login = null;
   password = null;

@@ -58,8 +58,6 @@ export class BackendService {
   }
 
   resetUserPassword(id: number, password: string): Observable<any> {
-    const token = localStorage.getItem("token");
-    httpOptions.headers = httpOptions.headers.get("Authorization", token);
     return this.http.post<any>(
       `${this.baseURL}/resetUserPassword`,
       { id, password },
@@ -68,8 +66,6 @@ export class BackendService {
   }
 
   addNewRecord(record: any, recordType: string): Observable<any[]> {
-    const token = localStorage.getItem("token");
-    httpOptions.headers = httpOptions.headers.get("Authorization", token);
     console.log(record);
     return this.http.post<any>(
       `${this.baseURL}/${recordType}`,
@@ -79,8 +75,6 @@ export class BackendService {
   }
 
   changeFlag(id: number, recordType: string): Observable<any> {
-    const token = localStorage.getItem("token");
-    httpOptions.headers = httpOptions.headers.get("Authorization", token);
     return this.http.put(
       `${this.baseURL}/changeFlag/${recordType}/${id}`,
       {},
@@ -89,8 +83,6 @@ export class BackendService {
   }
 
   sendMsgToQuoteServer(id: number, msg: string): Observable<any> {
-    const token = localStorage.getItem("token");
-    httpOptions.headers = httpOptions.headers.get("Authorization", token);
     return this.http.get<any>(
       `${this.baseURL}/quoteserver/${id}/${msg}`,
       httpOptions
