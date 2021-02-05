@@ -40,7 +40,7 @@ export class BackendService {
 
   setToken(token) {
     httpOptions.headers = httpOptions.headers.set("Authorization", token);
-    this.router.navigate(["users"]);
+    //this.router.navigate(["users"]);
   }
 
   logOut() {

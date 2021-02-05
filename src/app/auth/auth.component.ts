@@ -23,7 +23,7 @@ export class AuthComponent {
         localStorage.setItem("token", res.token);
         localStorage.setItem("tokenExpirationDate", res.tokenExpiresIn);
         this.backendService.setToken(res.token);
-        //this.router.navigate(["users"]);
+        this.router.navigate(["users"]);
         // moved navigation to the service
       });
   }

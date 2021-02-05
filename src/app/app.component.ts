@@ -5,7 +5,7 @@ import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
 //import { SimplywhiteComponent } from "./@pages/layouts/simplywhite/simplywhite.component";
 import { RootLayout } from "./@pages/layouts/root/root.component";
 import { QuoteServersComponent } from "./tables/quoteservers/quoteServers.component";
-
+import { Router } from "@angular/router";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -35,11 +35,10 @@ export class AppComponent implements OnInit {
       iconName: "cpu"
     }
   ];
-
-  constructor(private backendService: BackendService) {}
-
+  constructor(private router: Router) {}
   ngOnInit() {
     //Will sidebar close on screens below 1024
-    //  this.autoHideMenuPin();
+    this.autoHideMenuPin();
+    this.router.navigate(["users"]);
   }
 }
