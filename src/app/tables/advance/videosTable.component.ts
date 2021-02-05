@@ -40,11 +40,8 @@ export class VideosTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.backendService.getAuthorizationToken().subscribe(data => {
-      this.backendService.setToken(data.token);
-      this.backendService.getData("video").subscribe(videos => {
-        this.dynamicRows = videos;
-      });
+    this.backendService.getData("video").subscribe(videos => {
+      this.dynamicRows = videos;
     });
   }
 
@@ -64,7 +61,7 @@ export class VideosTableComponent implements OnInit {
   }
 
   logOut() {
-    this.backendService.removeTokenFromLocalStorage();
+    this.backendService.logOut();
   }
 
   addVideo() {
