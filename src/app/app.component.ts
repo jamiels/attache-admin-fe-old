@@ -12,9 +12,6 @@ import { QuoteServersComponent } from "./tables/quoteservers/quoteServers.compon
   styleUrls: ["./@pages/layouts/simplywhite/simplywhite.component.scss"]
 })
 export class AppComponent extends RootLayout implements OnInit {
-  @ViewChild("loginModal", { static: true }) loginModal: ModalDirective;
-  isAuthenticated = false;
-
   title = "App works";
   login = null;
   password = null;
@@ -39,36 +36,10 @@ export class AppComponent extends RootLayout implements OnInit {
     }
   ];
 
-  constructor(private backendService: BackendService) {
-    this.changeLayout("menu-pin");
-    console.log("asd");
-    const token = localStorage.getItem("token");
-    if (!token.length) {
-      this.loginModal.show();
-      console.log("pach");
-      return;
-    } else {
-      this.isAuthenticated = true;
-      this.router.navigate(["users"]);
-    }
+  constructor(private backendService: BackendService) {}
+
+  ngOnInit() {
     //Will sidebar close on screens below 1024
     this.autoHideMenuPin();
-  }
-
-  ngOnInit() {}
-  authUser() {
-    this.backendService
-      .getAuthorizationToken(this.login, this.password)
-      .subscribe(res => {
-        console.log(res);
-
-        console.log("zzz");
-        localStorage.setItem("token", res.token);
-
-        this.isAuthenticated = true;
-        this.router.navigate(["users"]);
-
-        this.loginModal.hide();
-      });
   }
 }

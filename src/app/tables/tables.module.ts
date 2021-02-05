@@ -1,3 +1,4 @@
+import { UsersTableComponent } from "./usersTable.component";
 //Angular Dependencies
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-
+import { Router } from "@angular/router";
 import { User } from "../models/User";
 import { Video } from "../models/Video";
 
@@ -24,18 +24,7 @@ interface GetVids {
 export class BackendService {
   baseURL: string = "http://localhost:9000";
 
-  constructor(private http: HttpClient) {
-    /*
-    this.http
-      .post<any>(`${this.baseURL}/authenticate`, credentials)
-      .subscribe(data => {
-        console.log(data);
-        httpOptions.headers = httpOptions.headers.set(
-          "Authorization",
-          data.token
-        );
-      }); */
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
   removeTokenFromLocalStorage() {
     localStorage.removeItem("token");
@@ -50,13 +39,21 @@ export class BackendService {
   }
 
   setToken(token) {
-    localStorage.setItem("token", token);
     httpOptions.headers = httpOptions.headers.set("Authorization", token);
   }
 
+  logOut() {
+    httpOptions.headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    localStorage.removeItem("token");
+    localStorage.removeItem("tokenExpirationDate");
+    this.router.navigate(["login"]);
+  }
+
   getData(recordType: string): Observable<any[]> {
-    const token = localStorage.getItem("token");
-    httpOptions.headers = httpOptions.headers.get("Authorization", token);
+    //  const token = localStorage.getItem("token");
+    //httpOptions.headers = httpOptions.headers.get("Authorization", token);
     return this.http.get<any[]>(`${this.baseURL}/${recordType}`, httpOptions);
   }
 

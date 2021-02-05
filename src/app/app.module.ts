@@ -3,6 +3,7 @@ import { VideosTableComponent } from "./tables/advance/videosTable.component";
 import { UsersTableComponent } from "./tables/users/usersTable.component";
 import { QuoteServersComponent } from "./tables/quoteservers/quoteServers.component";
 import { ContainerComponent } from "./@pages/components/container/container.component";
+import { AuthComponent } from "./auth/auth.component";
 //Angular Core
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
@@ -99,7 +100,8 @@ export class AppHammerConfig extends HammerGestureConfig {
     AdvanceComponent,
     VideosTableComponent,
     UsersTableComponent,
-    QuoteServersComponent
+    QuoteServersComponent,
+    AuthComponent
   ],
   imports: [
     NgxDatatableModule,
