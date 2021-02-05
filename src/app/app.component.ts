@@ -11,7 +11,7 @@ import { QuoteServersComponent } from "./tables/quoteservers/quoteServers.compon
   templateUrl: "./app.component.html",
   styleUrls: ["./@pages/layouts/simplywhite/simplywhite.component.scss"]
 })
-export class AppComponent extends RootLayout implements OnInit {
+export class AppComponent implements OnInit {
   title = "App works";
   login = null;
   password = null;
@@ -40,6 +40,6 @@ export class AppComponent extends RootLayout implements OnInit {
 
   ngOnInit() {
     //Will sidebar close on screens below 1024
-    this.autoHideMenuPin();
+    //  this.autoHideMenuPin();
   }
 }

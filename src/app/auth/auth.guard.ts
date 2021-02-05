@@ -7,7 +7,7 @@ import {
   UrlTree
 } from "@angular/router";
 import { Injectable } from "@angular/core";
-
+import { Observable } from "rxjs";
 @Injectable({ providedIn: "root" })
 export class AuthGuard implements CanActivate {
   constructor(private router: Router, private backendService: BackendService) {}
@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     console.log(localStorage.getItem("tokenExpiresIn"));
     if (
       !!localStorage.getItem("token") &&
-      Date.now() < localStorage.getItem("tokenExpirationDate")
+      Date.now() < parseInt(localStorage.getItem("tokenExpirationDate"), 10)
     ) {
       this.backendService.setToken(localStorage.getItem("token"));
       return true;
