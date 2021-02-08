@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
   ngOnInit() {
     //Will sidebar close on screens below 1024
-    this.autoHideMenuPin();
+    //  this.autoHideMenuPin();
     this.router.navigate(["users"]);
   }
 }
