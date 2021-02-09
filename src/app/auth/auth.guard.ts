@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     console.log(localStorage.getItem("tokenExpiresIn"));
     if (
       !!localStorage.getItem("token") &&
-      Date.now() < parseInt(localStorage.getItem("tokenExpirationDate"), 10)
+      Date.now() < parseInt(localStorage.getItem("tokenExpirationDate"))
     ) {
       console.log("auth ok");
       this.backendService.setToken(localStorage.getItem("token"));

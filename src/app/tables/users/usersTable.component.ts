@@ -91,6 +91,8 @@ export class UsersTableComponent implements OnInit {
       .subscribe(res => {
         console.log(res);
         if (res["success"]) {
+          this.userResetPwdId = null;
+          this.resetPassword = null;
           this.resetUserPwdModal.hide();
           return;
         } else {
