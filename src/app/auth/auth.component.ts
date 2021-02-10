@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 })
 export class AuthComponent {
   title = "App works";
+  userName = null;
   login = null;
   password = null;
   constructor(private backendService: BackendService, private router: Router) {}

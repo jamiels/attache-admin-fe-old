@@ -141,3 +141,26 @@ body
 .sidebar-header {
   display: none !important;
 }
+
+body
+  > app-root
+  > div
+  > pg-sidebar
+  > div.sidebar-menu
+  > pg-menu-items
+  > ul
+  > li:nth-child(3)
+  > a
+  > span {
+  overflow: visible !important;
+}
+.sidebar-header {
+  display: none !important;
+}
+@media (max-width: 1824px) {
+  .container-fluid {
+    padding-left: 4vw !important;
+    padding-right: 4vw !important;
+    position: relative;
+  }
+}

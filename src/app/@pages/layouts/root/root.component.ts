@@ -256,7 +256,7 @@ export class RootLayout implements OnInit, OnDestroy {
 
   //Utils
   autoHideMenuPin() {
-    if (window.innerWidth < 1025) {
+    if (window.innerWidth < 1925) {
       if (pg.hasClass(document.body, "menu-pin")) {
         pg.addClass(document.body, "menu-unpinned");
         pg.removeClass(document.body, "menu-pin");
