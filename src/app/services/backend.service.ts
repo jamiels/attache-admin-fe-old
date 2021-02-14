@@ -22,7 +22,7 @@ interface GetVids {
   providedIn: "root"
 })
 export class BackendService {
-  baseURL: string = "http://localhost:9000";
+  baseURL: string = "https://localhost:9000";
 
   constructor(private http: HttpClient, private router: Router) {}
 
