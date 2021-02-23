@@ -10,18 +10,20 @@ import {
   TemplateRef,
   ContentChild,
   HostListener,
-  HostBinding
-} from '@angular/core';
-import { Subscription } from 'rxjs';
-import { pagesToggleService } from '../../services/toggler.service';
+  HostBinding,
+  EventEmitter,
+  Output
+} from "@angular/core";
+import { Subscription } from "rxjs";
+import { pagesToggleService } from "../../services/toggler.service";
 declare var pg: any;
 
 @Component({
-  selector: 'pg-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+  selector: "pg-sidebar",
+  templateUrl: "./sidebar.component.html",
+  styleUrls: ["./sidebar.component.scss"],
   host: {
-    class: 'page-sidebar'
+    class: "page-sidebar"
   },
   encapsulation: ViewEncapsulation.None
 })
@@ -30,18 +32,43 @@ export class SidebarComponent implements OnInit {
   pin: boolean = false;
   drawer: boolean = false;
   sidebar;
+  wasInside = false;
   timer;
-  @HostBinding('style.transform')
+  @HostBinding("style.transform")
   style: string;
 
   private sideBarWidth = 280;
   private sideBarWidthCondensed = 280 - 70;
 
-  @ContentChild('sideBarOverlay', { static: true }) sideBarOverlay: TemplateRef<void>;
-  @ContentChild('sideBarHeader', { static: true }) sideBarHeader: TemplateRef<void>;
-  @ContentChild('menuItems', { static: true }) menuItems: TemplateRef<void>;
+  @ContentChild("sideBarOverlay", { static: true }) sideBarOverlay: TemplateRef<
+    void
+  >;
+  @ContentChild("sideBarHeader", { static: true }) sideBarHeader: TemplateRef<
+    void
+  >;
+  @ContentChild("menuItems", { static: true }) menuItems: TemplateRef<void>;
 
-  constructor(private appSidebar: ElementRef, private toggler: pagesToggleService) {
+  @Input() makeDifferent;
+
+  @HostListener("click")
+  clickInside() {
+    console.log("1 c;");
+    this.wasInside = true;
+  }
+
+  @HostListener("document:click")
+  clickout() {
+    console.log("1 ccc;");
+    if (!this.wasInside) {
+      this.closeSideBar();
+    }
+    this.wasInside = false;
+  }
+
+  constructor(
+    private appSidebar: ElementRef,
+    private toggler: pagesToggleService
+  ) {
     this.subscriptions.push(
       this.toggler.sideBarToggle.subscribe(toggle => {
         this.toggleMobile(toggle);
@@ -67,47 +94,47 @@ export class SidebarComponent implements OnInit {
     }
     clearTimeout(this.timer);
   }
-  @HostBinding('class.visible') mobileSidebar: boolean;
+  @HostBinding("class.visible") mobileSidebar: boolean;
 
-  @HostListener('mouseenter', ['$event'])
-  @HostListener('click', ['$event'])
+  @HostListener("mouseenter", ["$event"])
+  @HostListener("click", ["$event"])
   openSideBar() {
     if (pg.isVisibleSm() || pg.isVisibleXs()) {
-        return false;
+      return false;
     }
     if (this.pin) {
-        return false;
+      return false;
     }
 
-    this.style = 'translate3d(' + this.sideBarWidthCondensed + 'px, 0,0)';
-    pg.addClass(document.body, 'sidebar-visible');
+    this.style = "translate3d(" + this.sideBarWidthCondensed + "px, 0,0)";
+    pg.addClass(document.body, "sidebar-visible");
   }
 
   closeSideBar() {
+    this.style = "translate3d(0,0,0)";
+    pg.removeClass(document.body, "sidebar-visible");
     if (pg.isVisibleSm() || pg.isVisibleXs()) {
-        return false;
+      return false;
     }
     if (this.pin) {
-        return false;
+      return false;
     }
-    this.style = 'translate3d(0,0,0)';
-    pg.removeClass(document.body, 'sidebar-visible');
     // this.drawer = false;
   }
 
   toggleMenuPin() {
     if (this.pin) {
-        this.pin = false;
+      this.pin = false;
     } else {
-        this.pin = true;
+      this.pin = true;
     }
   }
 
   toggleDrawer() {
     if (this.drawer) {
-        this.drawer = false;
+      this.drawer = false;
     } else {
-        this.drawer = true;
+      this.drawer = true;
     }
   }
 

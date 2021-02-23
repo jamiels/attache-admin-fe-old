@@ -42,11 +42,8 @@ export class QuoteServersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.backendService.getAuthorizationToken().subscribe(data => {
-      this.backendService.setToken(data.token);
-      this.backendService.getData("quoteserver").subscribe(ress => {
-        this.dynamicRows = ress;
-      });
+    this.backendService.getData("quoteserver").subscribe(ress => {
+      this.dynamicRows = ress;
     });
   }
 
@@ -61,7 +58,7 @@ export class QuoteServersComponent implements OnInit {
   }
 
   logOut() {
-    this.backendService.removeTokenFromLocalStorage();
+    this.backendService.logOut();
   }
 
   addUser() {

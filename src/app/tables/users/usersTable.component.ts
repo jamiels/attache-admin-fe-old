@@ -47,11 +47,8 @@ export class UsersTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.backendService.getAuthorizationToken().subscribe(data => {
-      this.backendService.setToken(data.token);
-      this.backendService.getData("user").subscribe(ress => {
-        this.dynamicRows = ress;
-      });
+    this.backendService.getData("user").subscribe(ress => {
+      this.dynamicRows = ress;
     });
   }
 
@@ -71,7 +68,7 @@ export class UsersTableComponent implements OnInit {
   }
 
   logOut() {
-    this.backendService.removeTokenFromLocalStorage();
+    this.backendService.logOut();
   }
 
   showPwdModal(id) {
@@ -85,6 +82,23 @@ export class UsersTableComponent implements OnInit {
       this.pwdErr = true;
       return;
     }
+    const body = {
+      id: this.userResetPwdId,
+      password: this.resetPassword
+    };
+    this.backendService
+      .resetUserPassword(this.userResetPwdId, this.resetPassword)
+      .subscribe(res => {
+        console.log(res);
+        if (res["success"]) {
+          this.userResetPwdId = null;
+          this.resetPassword = null;
+          this.resetUserPwdModal.hide();
+          return;
+        } else {
+          alert("Unknown server error");
+        }
+      });
   }
   addUser() {
     let temp = {
