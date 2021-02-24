@@ -10,15 +10,15 @@ import { Router } from "@angular/router";
 export class AuthComponent {
   title = "App works";
   userName = null;
-  login = null;
+  email = null;
   password = null;
   constructor(private backendService: BackendService, private router: Router) {}
 
   authUser() {
-    console.log(this.login);
+    console.log(this.email);
     console.log(this.password);
     this.backendService
-      .getAuthorizationToken(this.login, this.password)
+      .getAuthorizationToken(this.email, this.password)
       .subscribe(res => {
         console.log(res);
         localStorage.setItem("token", res.token);

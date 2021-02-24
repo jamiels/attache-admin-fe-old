@@ -30,9 +30,9 @@ export class BackendService {
     localStorage.removeItem("token");
   }
 
-  getAuthorizationToken(login, password): Observable<any> {
+  getAuthorizationToken(email, password): Observable<any> {
     const credentials = {
-      login,
+      email,
       password
     };
     return this.http.post<any>(`${this.baseURL}/authenticate`, credentials);
